@@ -310,11 +310,13 @@
 <article class="md-content__inner md-typeset">
 <h1>Lancement du projet</h1>
 <p>Avant de lancer la commande <code>task</code> qui va exécuter les tâches une-par-une, il convient de vérifier que les dépendances soient présentes sur votre machine. </p>
-<p>La page permettant d'installer les dépendances est accessible <a href="../dep/">ici</a></p>
+<p>La page permettant d’installer les dépendances est accessible <a href="../dep/">ici</a></p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">¶</a></h2>
-<p>Avant de lancer la tache permettant de lancer les étapes à la suite. Il est nécéssaire de configurer les fichiers suivants :
-- <code>Taskfile.yaml</code>
-- <code>secret.dev.yaml</code></p>
+<p>Avant de lancer la tache permettant de lancer les étapes à la suite. Il est nécéssaire de configurer les fichiers suivants :</p>
+<ul>
+<li><code>Taskfile.yaml</code></li>
+<li><code>secret.dev.yaml</code></li>
+</ul>
 <h3 id="taskfile">Taskfile<a class="headerlink" href="#taskfile" title="Permanent link">¶</a></h3>
 <p>Dans le fichier <code>Taskfile.yaml</code>, voici les variables à éditer : </p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>vars:
@@ -324,9 +326,9 @@
 </code></pre></div>
 <ul>
 <li><code>secret_file</code> renvoie vers le fichier contenant les variables nécéssaires à Packer et Terraform.</li>
-<li><code>hypervisor</code> permet à task de lancer Terraform/Packer dans des contextes différents: (ex:<code>VM/Libvirt</code> pour Terraform si l'hyperviseur est <code>Libvirt</code>).
-<em>Pour l'instant, je n'ai prévu que Proxmox et Libvirt.</em></li>
-<li><code>distribution</code> identique à <code>hypervisor</code> : permet à Packer/Terraform de trouver des contextes adaptés (ex:<code>VM/Libvirt/Debian</code> si l'hyperviseur est <code>Libvirt</code> et la distribution est <code>Debian</code>)</li>
+<li><code>hypervisor</code> permet à task de lancer Terraform/Packer dans des contextes différents: (ex:<code>VM/Libvirt</code> pour Terraform si l’hyperviseur est <code>Libvirt</code>).
+<em>Pour l’instant, je n’ai prévu que Proxmox et Libvirt.</em></li>
+<li><code>distribution</code> identique à <code>hypervisor</code> : permet à Packer/Terraform de trouver des contextes adaptés (ex:<code>VM/Libvirt/Debian</code> si l’hyperviseur est <code>Libvirt</code> et la distribution est <code>Debian</code>)</li>
 </ul>
 <h3 id="secretfile">SecretFile<a class="headerlink" href="#secretfile" title="Permanent link">¶</a></h3>
 <p>Voici un fichier <code>secret.dev.yml</code> fonctionnel:

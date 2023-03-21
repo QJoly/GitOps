@@ -424,11 +424,11 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>La plupart des dépendances peuvent s’installer dans votre répertoire home <em>(dans le dossier <code>~/.local/bin</code>)</em>.
-Je vous recommande <strong>fortement</strong> d’ajouter de manière permanente ce dossier dans votre variable d’environnement <code>$PATH</code>.</p>
+<p>La plupart des dépendances peuvent s'installer dans votre répertoire home <em>(dans le dossier <code>~/.local/bin</code>)</em>.
+Je vous recommande <strong>fortement</strong> d'ajouter de manière permanente ce dossier dans votre variable d'environnement <code>$PATH</code>.</p>
 <p>Pour cela, ajoutez la ligne suivante dans votre fichier <code>~/.bashrc</code> pour Bash, ou <code>~/.zshrc</code> pour Zsh.</p>
 <h2 id="installation-de-terraform">Installation de Terraform<a class="headerlink" href="#installation-de-terraform" title="Permanent link">¶</a></h2>
-<p>Le détail de l’installation est disponible sur le site officiel de Hashicorp (<a href="https://developer.hashicorp.com/terraform/downloads?product_intent=terraform">lien ici</a>)</p>
+<p>Le détail de l'installation est disponible sur le site officiel de Hashicorp (<a href="https://developer.hashicorp.com/terraform/downloads?product_intent=terraform">lien ici</a>)</p>
 <h3 id="ubuntu-debian">Ubuntu / Debian<a class="headerlink" href="#ubuntu-debian" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>wget<span class="w"> </span>-O-<span class="w"> </span>https://apt.releases.hashicorp.com/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/usr/share/keyrings/hashicorp-archive-keyring.gpg
 <a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/hashicorp.list
@@ -443,7 +443,7 @@ Je vous recommande <strong>fortement</strong> d’ajouter de manière permanente
 </code></pre></div>
 <p>Pour vérifier que Terraform est bien installé, lancez la commande <code>terraform -version</code>.</p>
 <h2 id="installation-de-packer">Installation de Packer<a class="headerlink" href="#installation-de-packer" title="Permanent link">¶</a></h2>
-<p>Le détail de l’installation est disponible sur le site officiel de Hashicorp (<a href="https://developer.hashicorp.com/packer/downloads">lien ici</a>)</p>
+<p>Le détail de l'installation est disponible sur le site officiel de Hashicorp (<a href="https://developer.hashicorp.com/packer/downloads">lien ici</a>)</p>
 <h3 id="ubuntu-debian_1">Ubuntu / Debian<a class="headerlink" href="#ubuntu-debian_1" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>wget<span class="w"> </span>-O-<span class="w"> </span>https://apt.releases.hashicorp.com/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/usr/share/keyrings/hashicorp-archive-keyring.gpg
 <a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/hashicorp.list
@@ -458,14 +458,14 @@ Je vous recommande <strong>fortement</strong> d’ajouter de manière permanente
 </code></pre></div>
 <p>Pour vérifiez que Packer est bien installé, lancez la commande <code>packer -version</code>.</p>
 <h1 id="j2cli">J2Cli<a class="headerlink" href="#j2cli" title="Permanent link">¶</a></h1>
-<p><strong>j2cli</strong> est la version ‘ligne de commande’ de l’outil <em><a href="https://jinja.palletsprojects.com">Jinja2</a></em> permettant de créer des contenus dynamiques dans des fichiers textuels. Dans le projet <code>GitOps</code>, nous l’utilisons pour faire du remplacement dans les fichiers <code>preseed.cfg</code> durant l’installation de Debian.</p>
-<p>Il sera nécéssaire d’avoir <em>Python3</em> et <em>Pip</em> installé sur votre système. Si ce n’est pas le cas, je vous invite à consulter <a href="https://pip.pypa.io/en/stable/installation/">cette page</a>.</p>
+<p><strong>j2cli</strong> est la version 'ligne de commande' de l'outil <em><a href="https://jinja.palletsprojects.com">Jinja2</a></em> permettant de créer des contenus dynamiques dans des fichiers textuels. Dans le projet <code>GitOps</code>, nous l'utilisons pour faire du remplacement dans les fichiers <code>preseed.cfg</code> durant l'installation de Debian.</p>
+<p>Il sera nécéssaire d'avoir <em>Python3</em> et <em>Pip</em> installé sur votre système. Si ce n'est pas le cas, je vous invite à consulter <a href="https://pip.pypa.io/en/stable/installation/">cette page</a>.</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>python3 -m pip install j2cli
 <a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>export PATH=$PATH:~/.local/bin/
 </code></pre></div>
 <p>Pour vérifier que j2cli est bien installé, lancez la commande <code>j2 -v</code>.</p>
 <h1 id="installation-de-yq">Installation de yq<a class="headerlink" href="#installation-de-yq" title="Permanent link">¶</a></h1>
-<p><em>YQ</em> est un utilitaire permettant d’interagir avec les fichiers <code>.yaml</code> et <code>.json</code> depuis la CLI <em>Bash</em>. Nous l’utilisons pour convertir le fichier <code>secret.dev.yaml</code> en <code>.env</code>.</p>
+<p><em>YQ</em> est un utilitaire permettant d'interagir avec les fichiers <code>.yaml</code> et <code>.json</code> depuis la CLI <em>Bash</em>. Nous l'utilisons pour convertir le fichier <code>secret.dev.yaml</code> en <code>.env</code>.</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/bin
 <a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>wget<span class="w"> </span>https://github.com/mikefarah/yq/releases/download/v4.32.2/yq_linux_amd64<span class="w"> </span>-O<span class="w"> </span>~/.local/bin/yq
 <a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>chmod<span class="w"> </span>+x<span class="w"> </span>~/.local/bin/yq
@@ -493,15 +493,15 @@ Je vous recommande <strong>fortement</strong> d’ajouter de manière permanente
 </code></pre></div>
 <p>Pour vérifier que Flux est bien installé, lancez la commande <code>flux --version</code>.</p>
 <h1 id="installation-de-sops-faculatif">Installation de SOPS (Faculatif)<a class="headerlink" href="#installation-de-sops-faculatif" title="Permanent link">¶</a></h1>
-<p>SOPS est un outil permettant de chiffrer des sections dans des <strong>YML, JSON, INI</strong>. Je l’utilise pour stocker des secrets dans mon dépôt qui seront indéchiffrables sans ma clé <em>Age</em>.</p>
-<p>L’usage de SOPS est <strong>facultatif</strong>. Vous pouvez très bien créer votre fichier <em>secret.*.yaml</em> sans chiffrer.</p>
+<p>SOPS est un outil permettant de chiffrer des sections dans des <strong>YML, JSON, INI</strong>. Je l'utilise pour stocker des secrets dans mon dépôt qui seront indéchiffrables sans ma clé <em>Age</em>.</p>
+<p>L'usage de SOPS est <strong>facultatif</strong>. Vous pouvez très bien créer votre fichier <em>secret.*.yaml</em> sans chiffrer.</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>wget<span class="w"> </span>https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux<span class="w"> </span>-O-<span class="w"> </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span>-c<span class="w"> </span>-<span class="w"> </span>&gt;<span class="w"> </span>sops
 <a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./sops
 <a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/bin
 <a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>mv<span class="w"> </span>./sops<span class="w"> </span>~/.local/bin/sops
 <a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:~/.local/bin/
 </code></pre></div>
-<p>Vous trouverez un exemple d’utilisation de Sops et Age sur <a href="../sops/">cette page</a></p>
+<p>Vous trouverez un exemple d'utilisation de Sops et Age sur <a href="../sops/">cette page</a></p>
 <h1 id="installation-de-pre-commit-faculatif">Installation de Pre-Commit (Faculatif)<a class="headerlink" href="#installation-de-pre-commit-faculatif" title="Permanent link">¶</a></h1>
 <p>Pre-Commit nous permet de créer un Hook sur <em>Git</em> qui va effectuer des actions avant de commit nos modifications.</p>
 <p>Dans le contexte de ce projet, pre-commit permet de chiffrer certaines variables dans les fichiers de configuration <em>(ex: <code>secret.dev.yaml</code>)</em>.</p>

@@ -7,11 +7,11 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="My full homelab setup based on Packer/Terraform/Kubernetes" name="description"/>
 <meta content="Quentin JOLY" name="author"/>
-<link href="../start/" rel="prev"/>
-<link href="../proxmox/" rel="next"/>
+<link href=".." rel="prev"/>
+<link href="../start/" rel="next"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.1.3" name="generator"/>
-<title>Configurer Libvirt - GitOps</title>
+<title>Installer les dépendances - GitOps</title>
 <link href="../assets/stylesheets/main.c4a75a56.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,7 +36,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#utiliser-libvirt-sans-les-permissions-root">
+<a class="md-skip" href="#installation-de-terraform">
           Aller au contenu
         </a>
 </div>
@@ -60,7 +60,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Configurer Libvirt
+              Installer les dépendances
             
           </span>
 </div>
@@ -151,22 +151,45 @@
         Introduction
       </a>
 </li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
 <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
           General
           <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_2">
 <span class="md-nav__icon md-icon"></span>
           General
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../dep/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Installer les dépendances
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
         Installer les dépendances
       </a>
+<nav aria-label="Table des matières" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ubuntu-debian">
+    Ubuntu / Debian
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#linux">
+    Linux
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../start/">
@@ -176,21 +199,20 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
           Hyperviseurs
           <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
           Hyperviseurs
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../libvirt/">
         Configurer Libvirt
       </a>
 </li>
@@ -231,17 +253,79 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table des matières" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#ubuntu-debian">
+    Ubuntu / Debian
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#linux">
+    Linux
+  </a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="utiliser-libvirt-sans-les-permissions-root">Utiliser Libvirt sans les permissions root<a class="headerlink" href="#utiliser-libvirt-sans-les-permissions-root" title="Permanent link">¶</a></h1>
-<p>Le module Terraform Libvirt n'est utilisable que via l'URI <code>qemu:///system</code> <em>(Je souhaite résoudre ce problème au plus vite mais j'ai l'impression qu'il manque quelque chose au provider…)</em>. Si vous souhaitez lancer ce projet via un utilisateur <em>non-root</em>, il est impératif de rendre le socket Qemu disponible pour votre utilisateur.</p>
-<p>Je vous recommande donc de modifier la configuration de Libvirt <code>/etc/libvirt/libvirtd.conf</code> afin que la valeur <code>unix_sock_group</code> soit définie à <code>libvirt</code>. Créez ensuite le groupe nommé <code>libvirt</code> via la commande <code>addgroup libvirt</code>. </p>
-<p>Ensuite, ajoutez votre propre utilisateur à ce nouveau groupe <code>sudo usermod -a -G libvirt $(whoami)</code>. </p>
-<p>Une fois le service <code>libvirtd</code> redémarré, vous pourrez tester l'accès au socket via la commande <code>virsh -c qemu:///system list</code>.</p>
+<ul>
+<li>pre-commit</li>
+<li>yq </li>
+<li>taskfile</li>
+<li>flux</li>
+</ul>
+<h1 id="installation-de-terraform">Installation de Terraform<a class="headerlink" href="#installation-de-terraform" title="Permanent link">¶</a></h1>
+<p>Le détail de l'installation est disponible sur le site officiel de Hashicorp (<a href="https://developer.hashicorp.com/terraform/downloads?product_intent=terraform">lien ici</a>)</p>
+<h2 id="ubuntu-debian">Ubuntu / Debian<a class="headerlink" href="#ubuntu-debian" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>wget<span class="w"> </span>-O-<span class="w"> </span>https://apt.releases.hashicorp.com/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/usr/share/keyrings/hashicorp-archive-keyring.gpg
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/hashicorp.list
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>terraform
+</code></pre></div>
+<h2 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>wget<span class="w"> </span>https://releases.hashicorp.com/terraform/1.4.2/terraform_1.4.2_linux_amd64.zip<span class="w"> </span>-O-<span class="w"> </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span>-c<span class="w"> </span>-<span class="w"> </span>&gt;<span class="w"> </span>terraform
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./terraform
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/bin
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>mv<span class="w"> </span>./terraform<span class="w"> </span>~/.local/bin/terraform
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:~/.local/bin/
+</code></pre></div>
+<p>Pour vérifier que Terraform est bien installé, lancez la commande <code>terraform -version</code>.</p>
+<h1 id="installation-de-packer">Installation de Packer<a class="headerlink" href="#installation-de-packer" title="Permanent link">¶</a></h1>
+<p>Le détail de l'installation est disponible sur le site officiel de Hashicorp (<a href="https://developer.hashicorp.com/packer/downloads">lien ici</a>)</p>
+<h2 id="ubuntu-debian_1">Ubuntu / Debian<a class="headerlink" href="#ubuntu-debian_1" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>wget<span class="w"> </span>-O-<span class="w"> </span>https://apt.releases.hashicorp.com/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/usr/share/keyrings/hashicorp-archive-keyring.gpg
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> main"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/hashicorp.list
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>packer
+</code></pre></div>
+<h2 id="linux_1">Linux<a class="headerlink" href="#linux_1" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>wget<span class="w"> </span>https://releases.hashicorp.com/packer/1.8.6/packer_1.8.6_linux_amd64.zip<span class="w"> </span>-O-<span class="w"> </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span>-c<span class="w"> </span>-<span class="w"> </span>&gt;<span class="w"> </span>terraform
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./packer
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/bin
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>mv<span class="w"> </span>./packer<span class="w"> </span>~/.local/bin/packer
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:~/.local/bin/
+</code></pre></div>
+<p>Pour vérifiez que Packer est bien installé, lancez la commande <code>packer -version</code>.</p>
+<h1 id="j2cli">J2Cli<a class="headerlink" href="#j2cli" title="Permanent link">¶</a></h1>
+<p><strong>j2cli</strong> est la version 'ligne de commande' de l'outil <em><a href="https://jinja.palletsprojects.com">Jinja2</a></em> permettant de créer des contenus dynamiques dans des fichiers textuels. Dans le projet <code>GitOps</code>, nous l'utilisons pour faire du remplacement dans les fichiers <code>preseed.cfg</code> durant l'installation de Debian.</p>
+<h2 id="linux_2">Linux<a class="headerlink" href="#linux_2" title="Permanent link">¶</a></h2>
+<p>Il sera nécéssaire d'avoir <em>Python3</em> et <em>Pip</em> installé sur votre système. Si ce n'est pas le cas, je vous invite à consulter <a href="https://pip.pypa.io/en/stable/installation/">cette page</a>.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>python3 -m pip install j2cli
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>export PATH=$PATH:~/.local/bin/
+</code></pre></div>
+<p>Pour vérifier que j2cli est bien installé, lancez la commande <code>j2 -v</code>.</p>
+<h1 id="sops">SOPS<a class="headerlink" href="#sops" title="Permanent link">¶</a></h1>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>wget<span class="w"> </span>https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux<span class="w"> </span>-O-<span class="w"> </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span>-c<span class="w"> </span>-<span class="w"> </span>&gt;<span class="w"> </span>sops
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./sops
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.local/bin
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>mv<span class="w"> </span>./sops<span class="w"> </span>~/.local/bin/sops
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:~/.local/bin/
+</code></pre></div>
 <hr/>
 <div class="md-source-file">
 <small>

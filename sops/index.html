@@ -7,11 +7,10 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="My full homelab setup based on Packer/Terraform/Kubernetes" name="description"/>
 <meta content="Quentin JOLY" name="author"/>
-<link href="../start/" rel="prev"/>
-<link href="../proxmox/" rel="next"/>
+<link href="../proxmox/" rel="prev"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.1.3" name="generator"/>
-<title>Configurer Libvirt - GitOps</title>
+<title>Chiffrer vos secrets - GitOps</title>
 <link href="../assets/stylesheets/main.c4a75a56.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,9 +35,6 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#utiliser-libvirt-sans-les-permissions-root">
-          Aller au contenu
-        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -60,7 +56,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Configurer Libvirt
+              Chiffrer vos secrets
             
           </span>
 </div>
@@ -176,21 +172,20 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
 <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
           Hyperviseurs
           <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_3">
 <span class="md-nav__icon md-icon"></span>
           Hyperviseurs
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../libvirt/">
         Configurer Libvirt
       </a>
 </li>
@@ -202,20 +197,21 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
 <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
           Autre
           <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
 <label class="md-nav__title" for="__nav_4">
 <span class="md-nav__icon md-icon"></span>
           Autre
         </label>
 <ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../sops/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<a class="md-nav__link md-nav__link--active" href="./">
         Chiffrer vos secrets
       </a>
 </li>
@@ -237,11 +233,8 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="utiliser-libvirt-sans-les-permissions-root">Utiliser Libvirt sans les permissions root<a class="headerlink" href="#utiliser-libvirt-sans-les-permissions-root" title="Permanent link">¶</a></h1>
-<p>Le module Terraform Libvirt n'est utilisable que via l'URI <code>qemu:///system</code> <em>(Je souhaite résoudre ce problème au plus vite mais j'ai l'impression qu'il manque quelque chose au provider…)</em>. Si vous souhaitez lancer ce projet via un utilisateur <em>non-root</em>, il est impératif de rendre le socket Qemu disponible pour votre utilisateur.</p>
-<p>Je vous recommande donc de modifier la configuration de Libvirt <code>/etc/libvirt/libvirtd.conf</code> afin que la valeur <code>unix_sock_group</code> soit définie à <code>libvirt</code>. Créez ensuite le groupe nommé <code>libvirt</code> via la commande <code>addgroup libvirt</code>. </p>
-<p>Ensuite, ajoutez votre propre utilisateur à ce nouveau groupe <code>sudo usermod -a -G libvirt $(whoami)</code>. </p>
-<p>Une fois le service <code>libvirtd</code> redémarré, vous pourrez tester l'accès au socket via la commande <code>virsh -c qemu:///system list</code>.</p>
+<h1>Chiffrer vos secrets</h1>
+<p>todo</p>
 <hr/>
 <div class="md-source-file">
 <small>

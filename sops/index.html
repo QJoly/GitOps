@@ -8,7 +8,7 @@
 <meta content="My full homelab setup based on Packer/Terraform/Kubernetes" name="description"/>
 <meta content="Quentin JOLY" name="author"/>
 <link href="../proxmox/" rel="prev"/>
-<link href="../assets/images/favicon.png" rel="icon"/>
+<link href="https://raspbernetes.github.io/img/logo.svg" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-9.1.3" name="generator"/>
 <title>Chiffrer vos secrets - GitOps</title>
 <link href="../assets/stylesheets/main.c4a75a56.min.css" rel="stylesheet"/>
@@ -35,13 +35,16 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
+<a class="md-skip" href="#creer-notre-cle-age">
+          Aller au contenu
+        </a>
 </div>
 <div data-md-component="announce">
 </div>
 <header class="md-header md-header--shadow" data-md-component="header">
 <nav aria-label="En-tête" class="md-header__inner md-grid">
 <a aria-label="GitOps" class="md-header__button md-logo" data-md-component="logo" href=".." title="GitOps">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+<img alt="logo" src="https://raspbernetes.github.io/img/logo.svg"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
@@ -107,12 +110,12 @@
 </div>
 </div>
 <div class="md-header__source">
-<a class="md-source" data-md-component="source" href="https://github.com/qjoly/GitOps" title="Aller au dépôt">
+<a class="md-source" data-md-component="source" href="https://github.com/QJoly/GitOps" title="Aller au dépôt">
 <div class="md-source__icon md-icon">
 <svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
 </div>
 <div class="md-source__repository">
-    qjoly/GitOps
+    QJoly/GitOps
   </div>
 </a>
 </div>
@@ -127,17 +130,17 @@
 <nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
 <a aria-label="GitOps" class="md-nav__button md-logo" data-md-component="logo" href=".." title="GitOps">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"></path></svg>
+<img alt="logo" src="https://raspbernetes.github.io/img/logo.svg"/>
 </a>
     GitOps
   </label>
 <div class="md-nav__source">
-<a class="md-source" data-md-component="source" href="https://github.com/qjoly/GitOps" title="Aller au dépôt">
+<a class="md-source" data-md-component="source" href="https://github.com/QJoly/GitOps" title="Aller au dépôt">
 <div class="md-source__icon md-icon">
 <svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
 </div>
 <div class="md-source__repository">
-    qjoly/GitOps
+    QJoly/GitOps
   </div>
 </a>
 </div>
@@ -211,9 +214,36 @@
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Chiffrer vos secrets
+          <span class="md-nav__icon md-icon"></span>
+</label>
 <a class="md-nav__link md-nav__link--active" href="./">
         Chiffrer vos secrets
       </a>
+<nav aria-label="Table des matières" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#creer-notre-cle-age">
+    Créer notre clé Age
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#sops-en-pratique">
+    Sops, en pratique
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#chiffrer-avant-de-commiter">
+    Chiffrer avant de commiter
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -227,6 +257,27 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table des matières" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#creer-notre-cle-age">
+    Créer notre clé Age
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#sops-en-pratique">
+    Sops, en pratique
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#chiffrer-avant-de-commiter">
+    Chiffrer avant de commiter
+  </a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
@@ -234,7 +285,177 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1>Chiffrer vos secrets</h1>
-<p>todo</p>
+<p><strong>Cette page est une copie de mon article disponible <a href="https://thebidouilleur.xyz/docs/Adminsys/sops">ici</a></strong></p>
+<p>Pour éviter d’envoyer ses secrets sur Git, nous devons toujours être vigileant avant un quelconque Push. Et c’est justement le but de  <strong>Sops</strong> <em>(Secrets OPerationS)</em> qui va nous aider à stocker nos informations sur le dépôt.. mais en les chiffrant.</p>
+<p>Celui-ci est compatible avec de nombreux gestionnaires de secret comme : 
+- Hashicorp Vault
+- GCP KMS
+- PGP
+- Age <em>(Celui que nous allons utiliser)</em></p>
+<blockquote>
+<p>Age est un outil en Go simple et moderne. Celui-ci propose un format qui semble être validé par de nombreux experts.</p>
+</blockquote>
+<h2 id="creer-notre-cle-age">Créer notre clé Age<a class="headerlink" href="#creer-notre-cle-age" title="Permanent link">¶</a></h2>
+<p>Vous pouvez installer Age en suivant les instructions sur le dépôt officiel <a href="https://github.com/FiloSottile/age">ici</a></p>
+<p>Nous allons donc créer notre propre clé avec age. </p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.keys/
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>age-keygen<span class="w"> </span>-o<span class="w"> </span>~/.keys/ma-cle
+</code></pre></div>
+<p>En inspectant le contenu du fichier <code>~/.keys/ma-cle</code>, nous remarquons un schéma que l’on connait bien : une clé publique, et une clé privée. </p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a># created: 2023-02-15T07:50:20+01:00
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a># public key: age1220x7zmnp0j8du3vxk67a4mdkr3gqn9djjn7f7gamjclr3em7g2sxpns35
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>AGE-SECRET-KEY-1JY9Q0NWNRK4DCT9J3D2H0Z9D5ZY0XHV8EJ39JKKK2PW6SUH9FTFSN9T6HF
+</code></pre></div>
+<p>Et pour que <em>Sops</em> utilise cette clé, nous allons créer la variable d’environnement <code>SOPS_AGE_KEY_FILE</code> dans notre <code>~/.bashrc</code> ou <code>~/.zshrs</code>.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SOPS_AGE_KEY_FILE</span><span class="o">=</span>~/.keys/ma-cle
+</code></pre></div>
+<p>Maintenant, nous pouvons passer au niveau supérieur : <strong>créer notre premier fichier de secret</strong>.</p>
+<h2 id="sops-en-pratique">Sops, en pratique<a class="headerlink" href="#sops-en-pratique" title="Permanent link">¶</a></h2>
+<p>Vous pouvez installer Sops sur un système Amd64 en suivant ces instructions: 
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>wget<span class="w"> </span>https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64<span class="w"> </span>-O<span class="w"> </span>/usr/bin/sops
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/bin/sops
+</code></pre></div></p>
+<p>Notre système d’authentification est déjà créé : c’est notre couple de clé AGE. Ce que nous allons faire maintenant, c’est créer un secret qui sera déchiffrable uniquement par notre clé privée.</p>
+<p>Première chose que nous allons faire, c’est créer notre fichier <code>.sops.yaml</code>.</p>
+<p>Ce fichier permet de définir quels fichiers devront être manoeuvrés par SOPS et surtout : quels clés ont accès à ces fichiers. </p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a># .sops.yaml
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>creation_rules:
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>    - path_regex: secret.*\.ya?ml
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>      encrypted_regex: "^(username|password)$"
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>      key_groups:
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>      - age:
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>        - age1220x7zmnp0j8du3vxk67a4mdkr3gqn9djjn7f7gamjclr3em7g2sxpns35
+</code></pre></div>
+<p>Créons maintenant un fichier <code>secret.dev.yml</code>: 
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="s">"thebidouilleur"</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jadorelabidouille</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://thebidouilleur.xyz"</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="nt">QI</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.2</span>
+</code></pre></div></p>
+<p>et affichons ce même fichier en le chiffrant avec sops via l’argument <code>-e</code> <em>(encrypt)</em>.
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>➜<span class="w">  </span>sops<span class="w"> </span>-e<span class="w"> </span>secret.dev.yml
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>username:<span class="w"> </span>ENC<span class="o">[</span>AES256_GCM,data:8KUxRrhWLWsbxzJqxRQ<span class="o">=</span>,iv:qJQYUgCQ6wv9fmn+scJ3ui7tFD6lpoRH0qpC+n58sF8<span class="o">=</span>,tag:RJdluEfMdnXy6Zhpxn2AyQ<span class="o">==</span>,type:str<span class="o">]</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>password:<span class="w"> </span>ENC<span class="o">[</span>AES256_GCM,data:dm9t60SH/4/wqy3Ww5RxaDU<span class="o">=</span>,iv:ch0ZRbhN6+ouCNXzgWO63GHK9ewgOMpfJMzjYxIq8h4<span class="o">=</span>,tag:EKRHJBwRV8ZRRpDMaGG4sQ<span class="o">==</span>,type:str<span class="o">]</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>url:<span class="w"> </span>https://thebidouilleur.xyz
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>QI:<span class="w"> </span><span class="m">7</span>.2
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a>sops:
+<a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">    </span>kms:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span>gcp_kms:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span>azure_kv:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">    </span>hc_vault:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span>age:
+<a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">        </span>-<span class="w"> </span>recipient:<span class="w"> </span>age14ysm820ajay8wqslnkjqcewvq4tmeucth3a88qk4a7hl0mnwkfaqmj6xx5
+<a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">          </span>enc:<span class="w"> </span><span class="p">|</span>
+<a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w">            </span>-----BEGIN<span class="w"> </span>AGE<span class="w"> </span>ENCRYPTED<span class="w"> </span>FILE-----
+<a href="#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">            </span>YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBHZU9xNklSTkRTU0p0SFV3
+<a href="#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="w">            </span>NE1tV2M2Wjk3SDl2a1lJWk8wQi96Yjk2eUVjCi9qSWREUkZqTFpOa1luZEFlb2lK
+<a href="#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="w">            </span>dHBBNDllSFlhL2cycW82SGl4bDU2YXcKLS0tIHd5aCsyK1BHT2dDTGpZWUxITE83
+<a href="#__codelineno-6-18" id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="w">            </span>MFd5MlowTHNIekVXTzJWbXNuUmxGRWsKp1o+kh9lbWBLh6rZ4845c31rxowb9uX+
+<a href="#__codelineno-6-19" id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="w">            </span>/a01TYbiWfn2lWmUJ+gXq0nQZxqo3iDEI+mrG+n+c79rmq6BGPYVPw<span class="o">==</span>
+<a href="#__codelineno-6-20" id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="w">            </span>-----END<span class="w"> </span>AGE<span class="w"> </span>ENCRYPTED<span class="w"> </span>FILE-----
+<a href="#__codelineno-6-21" id="__codelineno-6-21" name="__codelineno-6-21"></a><span class="w">    </span>lastmodified:<span class="w"> </span><span class="s2">"2023-02-15T11:44:32Z"</span>
+<a href="#__codelineno-6-22" id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="w">    </span>mac:<span class="w"> </span>ENC<span class="o">[</span>AES256_GCM,data:cUtxnG/ycha3Zk0xNrmeioeBB9SiH3U4ENbnGtkpJmM9SBOFVZGKikaDZwdk1c2aflC07kELIoN0BxspgJseCLNvA3nsTYEEjHe53zJZUaDYn7u0D1+th3XjYdU17zdx9ECN5SjExvOIDLmQ4j512/LCN+lBVi4SxaJWDqzzva0<span class="o">=</span>,iv:vhrbuibyInOxcYihgMVZN8c0v05GdPXB+EbACQijg9s<span class="o">=</span>,tag:GHLv+agLCXcTiUDq8gBEkA<span class="o">==</span>,type:str<span class="o">]</span>
+<a href="#__codelineno-6-23" id="__codelineno-6-23" name="__codelineno-6-23"></a><span class="w">    </span>pgp:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-6-24" id="__codelineno-6-24" name="__codelineno-6-24"></a><span class="w">    </span>encrypted_regex:<span class="w"> </span>^<span class="o">(</span>username<span class="p">|</span>password<span class="o">)</span>$
+<a href="#__codelineno-6-25" id="__codelineno-6-25" name="__codelineno-6-25"></a><span class="w">    </span>version:<span class="w"> </span><span class="m">3</span>.7.3
+</code></pre></div></p>
+<p>Ni l’URL, ni mon QI n’ont été chiffrés. Gardez également en <em>tête</em> que la commande <strong>ne fait qu’afficher un output du même fichier chiffré, le fichier n’a pas été modifié</strong>. </p>
+<p>Si on souhaite ré-écrire le fichier, il faut rajouter l’argument <code>-i</code> : <code>sops -e -i secret.dev.yml</code></p>
+<p>Pour déchiffrer le fichier, il suffit de faire la même commande en changeant <code>-e</code> par <code>-d</code> <em>(decrypt)</em>.</p>
+<p>Si jamais je chiffre mon fichier <code>secret.dev.yml</code> et que je change de clé, nous serons dans l’incapacité de le chiffrer : 
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>➜ sops -d -i secret.dev.yml
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>Failed to get the data key required to decrypt the SOPS file.
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>Group 0: FAILED
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a>  age14ysm820ajay8wqslnkjqcewvq4tmeucth3a88qk4a7hl0mnwkfaqmj6xx5: FAILED
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>    - | no age identity found in "~/.keys/ma-cle" that
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a>      | could decrypt the data
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a>Recovery failed because no master key was able to decrypt the file. In
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a>order for SOPS to recover the file, at least one key has to be successful,
+<a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a>but none were.
+</code></pre></div></p>
+<p>Pour ajouter une clé pouvant déchiffrer les fichiers, rajoutez-là dans votre <code>.sops.yaml</code>.</p>
+<p>En déchiffrant puis rechiffrant les fichiers, la nouvelle clé y aura accès.</p>
+<h2 id="chiffrer-avant-de-commiter">Chiffrer avant de commiter<a class="headerlink" href="#chiffrer-avant-de-commiter" title="Permanent link">¶</a></h2>
+<p>Mais comme Skynet <em>(ou ChatGPT)</em> n’a pas encore remplacé les informaticiens : nous restons humains. Il est donc obligatoire de trouver un moyen pour ne <strong>jamais</strong> oublier de chiffrer nos secrets avant de commit. Et la solution est simple : <a href="https://pre-commit.com">pre-commit</a></p>
+<p>:::note Pre-Commit
+Pre-Commit est un utilitaire en Python permettant d’automatiser certaines taches avant de commit votre code. Il est ainsi possible de faire votre propre <em>CI</em> en testant vos fichiers ou … en chiffrant vos secrets.
+:::</p>
+<p>L’installation de pre-commit se fait avec <code>pip</code> <em>(Si vous n’êtes pas à l’aise avec Python, je vous invite à suivre <a href="https://pip.pypa.io/en/stable/installation/">cette documentation</a> pour l’installer.)</em>.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>pip<span class="w"> </span>install<span class="w"> </span>pre-commit
+</code></pre></div>
+<p>Si vous avez installé <code>pip</code> mais que vous n’arrivez pas à le lancer car <code>commande introuvable</code>, c’est surement car celui-ci ne s’est pas mis dans votre <code>$PATH</code>. 
+Il faudra ajouter le dossier <code>~/.local/bin</code> dans votre fichier <code>.bashrc</code> ou <code>.zshrc</code>.
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">:</span><span class="nv">$HOME</span><span class="s2">/.local/bin</span>
+</code></pre></div></p>
+<p>Une fois pre-commit installé, il faudra l’activer dans un dossier gérer par <em>Git</em>:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>➜<span class="w">  </span>pre-commit<span class="w"> </span>install
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>pre-commit<span class="w"> </span>installed<span class="w"> </span>at<span class="w"> </span>.git/hooks/pre-commit
+</code></pre></div>
+<p>Nous allons maintenant créer le fichier <code>.pre-commit-config.yaml</code>. avec le contenu suivant:  </p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>repos:
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a>- repo: local
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a>  hooks:
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a>    - id: encrypt files
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a>      name: encrypt files
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a>      entry: .pre-commit-sops.sh
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a>      language: script
+<a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a>      pass_filenames: true
+</code></pre></div>
+<p>Cette configuration permet à <strong>pre-commit</strong> d’exécuter le script <code>.pre-commit-sops.sh</code> avant chaque commit. Et voici le contenu de ce fichier : </p>
+<p><div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="ch">#!/bin/bash</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="nv">log_file</span><span class="o">=</span><span class="s2">"./pre-commit.log"</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="k">for</span><span class="w"> </span>filename<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="k">do</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Checking.... </span><span class="nv">$filename</span><span class="s2">"</span>
+<a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$filename</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^secret<span class="se">\.</span>.*<span class="se">\.</span>ya?ml$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a href="#__codelineno-12-7" id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$filename</span><span class="s2"> matches pattern, encrypting..."</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$log_file</span>
+<a href="#__codelineno-12-8" id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">  </span>sops<span class="w"> </span>-e<span class="w"> </span>-i<span class="w"> </span><span class="nv">$filename</span>
+<a href="#__codelineno-12-9" id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">  </span>git<span class="w"> </span>add<span class="w"> </span><span class="nv">$filename</span>
+<a href="#__codelineno-12-10" id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="k">else</span>
+<a href="#__codelineno-12-11" id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$filename</span><span class="s2"> does not match pattern and will not be encrypted"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$log_file</span>
+<a href="#__codelineno-12-12" id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="k">fi</span>
+<a href="#__codelineno-12-13" id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="k">done</span>
+</code></pre></div>
+<em>Donc si le fichier correspond au pattern identifiant les fichiers contenants les secrets, nous le chiffrons, et nous actualisons son contenu avant de commit.</em></p>
+<p>Pensez également à rendre votre fichier exécutable.</p>
+<p>On teste ça, le fichier <code>secret.dev.yml</code> devrait être chiffré après mon commit. 
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>TheBidouilleur:~/Documents/GitOps$<span class="w"> </span>cat<span class="w"> </span>secret.dev.yaml<span class="w"> </span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a>username:<span class="w"> </span>bigusername
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a>password:<span class="w"> </span>bigpassword
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a>chiffre-pas-ça:<span class="w"> </span>coucou2
+<a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a>TheBidouilleur:~/Documents/GitOps$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>secret.dev.yaml<span class="w"> </span>
+<a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a>TheBidouilleur:~/Documents/GitOps$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Je veux chiffrer mes secrets"</span>
+<a href="#__codelineno-13-7" id="__codelineno-13-7" name="__codelineno-13-7"></a>encrypt<span class="w"> </span>files............................................................Passed
+<a href="#__codelineno-13-8" id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="o">[</span>main<span class="w"> </span>7ffcf4a<span class="o">]</span><span class="w"> </span>Je<span class="w"> </span>veux<span class="w"> </span>chiffrer<span class="w"> </span>mes<span class="w"> </span>secrets
+<a href="#__codelineno-13-9" id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w"> </span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>changed,<span class="w"> </span><span class="m">23</span><span class="w"> </span>insertions<span class="o">(</span>+<span class="o">)</span>,<span class="w"> </span><span class="m">25</span><span class="w"> </span>deletions<span class="o">(</span>-<span class="o">)</span>
+<a href="#__codelineno-13-10" id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w"> </span>rewrite<span class="w"> </span>secret.dev.yaml<span class="w"> </span><span class="o">(</span><span class="m">75</span>%<span class="o">)</span>
+<a href="#__codelineno-13-11" id="__codelineno-13-11" name="__codelineno-13-11"></a>TheBidouilleur:~/Documents/GitOps$<span class="w"> </span>cat<span class="w"> </span>secret.dev.yaml<span class="w"> </span>
+<a href="#__codelineno-13-12" id="__codelineno-13-12" name="__codelineno-13-12"></a>username:<span class="w"> </span>ENC<span class="o">[</span>AES256_GCM,data:wrK2xpPUBYE9dEo<span class="o">=</span>,iv:B2KKu9Y3BeT9Cj8cgZFmxeK70ZOiJhE7wtRkYk0hY4U<span class="o">=</span>,tag:MKgFQqkSOD9tCVp1PlnVOA<span class="o">==</span>,type:str<span class="o">]</span>
+<a href="#__codelineno-13-13" id="__codelineno-13-13" name="__codelineno-13-13"></a>password:<span class="w"> </span>ENC<span class="o">[</span>AES256_GCM,data:qCTcjaUbPpzzMUc<span class="o">=</span>,iv:q3vmXf2YbZtSgm1vCj5tpdu+Ug4Hby9IOo2/y7zBwQI<span class="o">=</span>,tag:0TvqVAIDxxPLk1GsEDKXcQ<span class="o">==</span>,type:str<span class="o">]</span>
+<a href="#__codelineno-13-14" id="__codelineno-13-14" name="__codelineno-13-14"></a>chiffre-pas-ça:<span class="w"> </span>coucou2
+<a href="#__codelineno-13-15" id="__codelineno-13-15" name="__codelineno-13-15"></a>sops:
+<a href="#__codelineno-13-16" id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="w">    </span>kms:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-13-17" id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="w">    </span>gcp_kms:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-13-18" id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="w">    </span>azure_kv:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-13-19" id="__codelineno-13-19" name="__codelineno-13-19"></a><span class="w">    </span>hc_vault:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-13-20" id="__codelineno-13-20" name="__codelineno-13-20"></a><span class="w">    </span>age:
+<a href="#__codelineno-13-21" id="__codelineno-13-21" name="__codelineno-13-21"></a><span class="w">        </span>-<span class="w"> </span>recipient:<span class="w"> </span>age14ysm820ajay8wqslnkjqcewvq4tmeucth3a88qk4a7hl0mnwkfaqmj6xx5
+<a href="#__codelineno-13-22" id="__codelineno-13-22" name="__codelineno-13-22"></a><span class="w">          </span>enc:<span class="w"> </span><span class="p">|</span>
+<a href="#__codelineno-13-23" id="__codelineno-13-23" name="__codelineno-13-23"></a><span class="w">            </span>-----BEGIN<span class="w"> </span>AGE<span class="w"> </span>ENCRYPTED<span class="w"> </span>FILE-----
+<a href="#__codelineno-13-24" id="__codelineno-13-24" name="__codelineno-13-24"></a><span class="w">            </span>YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByTFFQMU95dVc3dkk5Y2VB
+<a href="#__codelineno-13-25" id="__codelineno-13-25" name="__codelineno-13-25"></a><span class="w">            </span>TFQ3czc5WDliNXpOV001b3FaNWdGbW82ampVCitzVGFmemFvdC9kVnF4SlBNMGdi
+<a href="#__codelineno-13-26" id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="w">            </span>Yjc3ZERiMWVKZXoveFdHbVRWU3pRc1kKLS0tIDFCOTh1U0F6QmtsaG1WTElDbjRz
+<a href="#__codelineno-13-27" id="__codelineno-13-27" name="__codelineno-13-27"></a><span class="w">            </span>TXdCeVpER0h6WG9XZm93bGI2Ni83SXMKCPLM5tTUYkhjirljDcNitID/2NXbOx4y
+<a href="#__codelineno-13-28" id="__codelineno-13-28" name="__codelineno-13-28"></a><span class="w">            </span>i5/f79+ulVkWm9hx+AmNBxdbzbopJOk+/y1UmWF64y7ovPjdFy5BSg<span class="o">==</span>
+<a href="#__codelineno-13-29" id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="w">            </span>-----END<span class="w"> </span>AGE<span class="w"> </span>ENCRYPTED<span class="w"> </span>FILE-----
+<a href="#__codelineno-13-30" id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="w">    </span>lastmodified:<span class="w"> </span><span class="s2">"2023-02-15T21:22:28Z"</span>
+<a href="#__codelineno-13-31" id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="w">    </span>mac:<span class="w"> </span>ENC<span class="o">[</span>AES256_GCM,data:2PlCiFkxCl84odqZ6Qxo74VLhAe2Tqa7pUDbYJTshpG+WKYj/mN9xvfU3Pz8NNe5vWoone2PV2nLvrLQlDQEjnM5PybLRVcSDiSPHF61VfdiI4G25DTScrHWmucSxIv7JFlagVH8JOjii43oe4Ul+coVhhSn3PClIS3X22ZqjUI<span class="o">=</span>,iv:mSZ6Pl0Q7RT3hSFsP0pmF77XnzNyZ6c50G2lsIw6zOU<span class="o">=</span>,tag:z6RH/DDhpRk7rtigdc3mXA<span class="o">==</span>,type:str<span class="o">]</span>
+<a href="#__codelineno-13-32" id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="w">    </span>pgp:<span class="w"> </span><span class="o">[]</span>
+<a href="#__codelineno-13-33" id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="w">    </span>encrypted_regex:<span class="w"> </span>^<span class="o">(</span>username<span class="p">|</span>password<span class="o">)</span>$
+<a href="#__codelineno-13-34" id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">    </span>version:<span class="w"> </span><span class="m">3</span>.7.3
+</code></pre></div></p>
 <hr/>
 <div class="md-source-file">
 <small>

@@ -36,6 +36,9 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
+<a class="md-skip" href="#configuration">
+          Aller au contenu
+        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -167,9 +170,45 @@
 </li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Lancement du projet
+          <span class="md-nav__icon md-icon"></span>
+</label>
 <a class="md-nav__link md-nav__link--active" href="./">
         Lancement du projet
       </a>
+<nav aria-label="Table des matières" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configuration">
+    Configuration
+  </a>
+<nav aria-label="Configuration" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#taskfile">
+    Taskfile
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#secretfile">
+    SecretFile
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lancement-du-projet">
+    Lancement du projet
+  </a>
+</li>
+</ul>
+</nav>
 </li>
 </ul>
 </nav>
@@ -233,6 +272,36 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table des matières" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configuration">
+    Configuration
+  </a>
+<nav aria-label="Configuration" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#taskfile">
+    Taskfile
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#secretfile">
+    SecretFile
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lancement-du-projet">
+    Lancement du projet
+  </a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
@@ -240,7 +309,66 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1>Lancement du projet</h1>
-<p>todo</p>
+<p>Avant de lancer la commande <code>task</code> qui va exécuter les tâches une-par-une, il convient de vérifier que les dépendances soient présentes sur votre machine. </p>
+<p>La page permettant d'installer les dépendances est accessible <a href="../dep/">ici</a></p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">¶</a></h2>
+<p>Avant de lancer la tache permettant de lancer les étapes à la suite. Il est nécéssaire de configurer les fichiers suivants :
+- <code>Taskfile.yaml</code>
+- <code>secret.dev.yaml</code></p>
+<h3 id="taskfile">Taskfile<a class="headerlink" href="#taskfile" title="Permanent link">¶</a></h3>
+<p>Dans le fichier <code>Taskfile.yaml</code>, voici les variables à éditer : </p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>vars:
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>  secret_file: ./secret.dev.yaml
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>  hypervisor: Libvirt
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>  distribution: Debian 
+</code></pre></div>
+<ul>
+<li><code>secret_file</code> renvoie vers le fichier contenant les variables nécéssaires à Packer et Terraform.</li>
+<li><code>hypervisor</code> permet à task de lancer Terraform/Packer dans des contextes différents: (ex:<code>VM/Libvirt</code> pour Terraform si l'hyperviseur est <code>Libvirt</code>).
+<em>Pour l'instant, je n'ai prévu que Proxmox et Libvirt.</em></li>
+<li><code>distribution</code> identique à <code>hypervisor</code> : permet à Packer/Terraform de trouver des contextes adaptés (ex:<code>VM/Libvirt/Debian</code> si l'hyperviseur est <code>Libvirt</code> et la distribution est <code>Debian</code>)</li>
+</ul>
+<h3 id="secretfile">SecretFile<a class="headerlink" href="#secretfile" title="Permanent link">¶</a></h3>
+<p>Voici un fichier <code>secret.dev.yml</code> fonctionnel:
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nt">vmtemplate</span><span class="p">:</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="nt">debian</span><span class="p">:</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9001</span><span class="w"> </span><span class="c1"># Only for Proxmox</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Debian</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">        </span><span class="nt">root_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rootpassword</span>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utilisateur</span>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pass</span>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">        </span><span class="c1"># Depending of the format of the disk</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">        </span><span class="nt">disk_prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vd</span>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1024</span>
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">        </span><span class="c1"># Only absolute path</span>
+<a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">        </span><span class="nt">ssh_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/kiko/.ssh/id_ed25519.pub</span>
+<a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">        </span><span class="nt">disk_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8192</span>
+<a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">        </span><span class="nt">iso</span><span class="p">:</span>
+<a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">            </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.6.0-amd64-netinst.iso</span>
+<a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">            </span><span class="nt">checksum</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sha512:224cd98011b9184e49f858a46096c6ff4894adff8945ce89b194541afdfd93b73b4666b0705234bd4dff42c0a914fdb6037dd0982efb5813e8a553d8e92e6f51</span>
+<a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="nt">hypervisor</span><span class="p">:</span>
+<a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">    </span><span class="nt">libvirt</span><span class="p">:</span>
+<a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="w">        </span><span class="nt">pool_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.libvirt/pool</span>
+<a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">        </span><span class="nt">pool_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster</span>
+<a href="#__codelineno-1-23" id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="w">        </span><span class="c1"># Libvirt will use qemu:///system as URI</span>
+<a href="#__codelineno-1-24" id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="nt">provisionning</span><span class="p">:</span>
+<a href="#__codelineno-1-25" id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="w">    </span><span class="nt">debian</span><span class="p">:</span>
+<a href="#__codelineno-1-26" id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a href="#__codelineno-1-27" id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a href="#__codelineno-1-28" id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="w">        </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1024</span>
+<a href="#__codelineno-1-29" id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="w">        </span><span class="c1"># Only compatible for Debian, Alpine is not yet supported by k3s-ansible</span>
+<a href="#__codelineno-1-30" id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="w">        </span><span class="nt">kubernetes</span><span class="p">:</span>
+<a href="#__codelineno-1-31" id="__codelineno-1-31" name="__codelineno-1-31"></a><span class="w">            </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a href="#__codelineno-1-32" id="__codelineno-1-32" name="__codelineno-1-32"></a><span class="w">            </span><span class="nt">nodes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</code></pre></div></p>
+<p>Par défaut, ce fichier va déployer 2 machines virtuelles et lancer le rôle <code>k3s-ansible</code> pour installer Kubernetes</p>
+<h2 id="lancement-du-projet">Lancement du projet<a class="headerlink" href="#lancement-du-projet" title="Permanent link">¶</a></h2>
+<p>Pour lancer les différentes étapes à la suite, il suffit de lancer la commande :</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>task<span class="w"> </span>general:all
+</code></pre></div>
+<script async="" id="asciicast-W1I0WheIlBW2pWPSfclnfTTAD" src="https://asciinema.org/a/W1I0WheIlBW2pWPSfclnfTTAD.js"></script>
 <hr/>
 <div class="md-source-file">
 <small>

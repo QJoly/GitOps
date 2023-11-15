@@ -13,10 +13,6 @@
       
       
       
-        <link rel="prev" href="../proxmox/">
-      
-      
-        <link rel="next" href="../fork/">
       
       
       <link rel="icon" href="https://raspbernetes.github.io/img/logo.svg">
@@ -24,7 +20,7 @@
     
     
       
-        <title>Chiffrer vos secrets - GitOps</title>
+        <title>Failed to connect fe80:: - GitOps</title>
       
     
     
@@ -90,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#creation-des-cles-de-chiffrement" class="md-skip">
+        <a href="#failed-to-connect-fe80" class="md-skip">
           Aller au contenu
         </a>
       
@@ -125,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Chiffrer vos secrets
+              Failed to connect fe80::
             
           </span>
         </div>
@@ -459,8 +455,6 @@
       
   
   
-    
-  
   
     
     
@@ -470,12 +464,12 @@
       
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -489,7 +483,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Autre
@@ -500,27 +494,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Chiffrer vos secrets
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../sops/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -529,58 +505,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table des matières
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#creation-des-cles-de-chiffrement" class="md-nav__link">
-    Création des clés de chiffrement
-  </a>
-  
-    <nav class="md-nav" aria-label="Création des clés de chiffrement">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cle-de-chiffrement-pour-packerterraform" class="md-nav__link">
-    Clé de chiffrement pour Packer/Terraform
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cle-de-chiffrement-pour-fluxcd" class="md-nav__link">
-    Clé de chiffrement pour FluxCD
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configurer-cette-cle" class="md-nav__link">
-    Configurer cette clé
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -630,48 +554,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table des matières
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#creation-des-cles-de-chiffrement" class="md-nav__link">
-    Création des clés de chiffrement
-  </a>
-  
-    <nav class="md-nav" aria-label="Création des clés de chiffrement">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cle-de-chiffrement-pour-packerterraform" class="md-nav__link">
-    Clé de chiffrement pour Packer/Terraform
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cle-de-chiffrement-pour-fluxcd" class="md-nav__link">
-    Clé de chiffrement pour FluxCD
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configurer-cette-cle" class="md-nav__link">
-    Configurer cette clé
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -689,46 +573,22 @@
   
 
 
-  <h1>Chiffrer vos secrets</h1>
-
-<p><strong>Article résumant Sops et son age disponible: <a href="https://une-tasse-de.cafe/blog/sops/">ici</a></strong></p>
-<p>Sops est un outil permettant de chiffrer des fichiers de configuration. Celui-ci utilise une méthode de chiffrement asymétrique, c'est-à-dire qu'il utilise une clé publique pour chiffrer et une clé privée pour déchiffrer. Cela permet de chiffrer des fichiers de configuration et de les partager avec d'autres personnes sans avoir à partager la clé privée.</p>
-<p>Mon projet GitOps utilise Sops pour chiffrer le fichier principal de configuration <code>secret.*.yaml</code>. Il est recommandé d'avoir <strong>deux</strong> clés différentes: l'une pour le déploiement Packer/Terraform, l'autre pour le déploiement sur Kubernetes via FluxCD.</p>
-<p><strong>Il est toutefois possible d'utiliser la même clé pour les deux déploiements.</strong></p>
-<h2 id="creation-des-cles-de-chiffrement">Création des clés de chiffrement<a class="headerlink" href="#creation-des-cles-de-chiffrement" title="Permanent link">&para;</a></h2>
-<p>J'utilise Age pour générer les clés de chiffrement. Age est un outil permettant de générer des clés de chiffrement asymétrique.</p>
-<h3 id="cle-de-chiffrement-pour-packerterraform">Clé de chiffrement pour Packer/Terraform<a class="headerlink" href="#cle-de-chiffrement-pour-packerterraform" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Génération de la clé de chiffrement pour Packer/Terraform</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mkdir<span class="w"> </span>~/.age/
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>age-keygen<span class="w"> </span>-o<span class="w"> </span>~/.age/packer-terraform.key
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">SOPS_AGE_KEY_FILE</span><span class="o">=</span>~/.age/packer-terraform.key
-</code></pre></div>
-<h3 id="cle-de-chiffrement-pour-fluxcd">Clé de chiffrement pour FluxCD<a class="headerlink" href="#cle-de-chiffrement-pour-fluxcd" title="Permanent link">&para;</a></h3>
-<p>Il faut placer la clé de chiffrement à l'emplacement <code>.secrets/age</code> du dépôt GitOps.</p>
-<p>Vous pouvez alors reprendre la même clé de chiffrement que pour Packer/Terraform ou en générer une nouvelle.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cp<span class="w"> </span>~/.age/packer-terraform.key<span class="w"> </span>.secrets/age
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># OU</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>task<span class="w"> </span>kubernetes:create-age-key
-</code></pre></div>
-<h2 id="configurer-cette-cle">Configurer cette clé<a class="headerlink" href="#configurer-cette-cle" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>  - cmd: task kubernetes:create-age-key
-    ignore_error: true
-  - task kubernetes:create-age-secret
-  - task kubernetes:configure-sops-with-age-key
-</code></pre></div>
-
-<p>Lancer la tache <code>kubernetes:create-age-secret</code> pour créer un secret Kubernetes contenant la clé de chiffrement.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>task<span class="w"> </span>kubernetes:create-age-secret
-</code></pre></div>
-<p>Pour configurer le fichier <code>kubernetes/.sops.yaml</code> avec la clé de chiffrement, lancer la tache <code>kubernetes:configure-sops-with-age-key</code>.</p>
-<p>**Ne pas oublier de commiter les changements </p>
+<h1 id="failed-to-connect-fe80">Failed to connect fe80::<a class="headerlink" href="#failed-to-connect-fe80" title="Permanent link">&para;</a></h1>
+<p>En utilisant le provider Libvirt sur Terraform, il est possible que vous tombiez sur cette erreur durant le lancement d'Ansible.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>│ TASK [Gathering Facts] *********************************************************
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│ fatal: [kube-0-tf]: UNREACHABLE! =&gt; {&quot;changed&quot;: false, &quot;msg&quot;: &quot;Failed to connect to the host via ssh: ssh: connect to host fe80::5054:ff:fec2:1c4 port 22: Invalid argument&quot;, &quot;unreachable&quot;: true}
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│ ok: [kube-2-tf]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│ ok: [kube-1-tf]
+</code></pre></div></p>
+<p>La raison est que Terraform récupère l'adresse IP de la machine <strong>avant qu'elle ne puisse obtenir son adresse IPv4</strong>.</p>
+<p>La seule solution trouvée pour le moment est de relancer le Terraform pour qu'il obtienne l'IPv4. Le fichier <code>inventory.ini</code> sera recréé.</p>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Dernière mise à jour:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 15, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 26, 2023</span>
       
     
   </small>
